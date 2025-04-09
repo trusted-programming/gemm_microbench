@@ -1,0 +1,10 @@
+[package]
+name = "gemm_microbench"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+matrixmultiply = { version = "0.3.9", features = ["threading"] }
+
+[lib]
+crate-type = ["cdylib"]
