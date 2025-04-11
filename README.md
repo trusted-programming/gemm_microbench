@@ -4,7 +4,7 @@ Compare MatMul performance of various library implementations.
 
 ## Results
 
-|    Library     | Language | Result |
-|----------------|----------|--------|
-|     Eigen      |   C++    |  TODO  |
-| matrixmultiply |   Rust   |  TODO  |
+|    Library     | Language | Size | Result |
+|----------------|----------|------|--------|
+|     Eigen      |   C++    | TODO |  TODO  |
+| matrixmultiply |   Rust   | TODO |  TODO  |

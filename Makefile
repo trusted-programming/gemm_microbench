@@ -4,11 +4,11 @@ full: clean preprocess run
 
 preprocess:
 	cargo build --release
-	g++ main.cpp -L./target/release -lmatmul_microbench -Wl,-rpath=../matmul_microbench/target/release -o matmul_bench -ldl
+	g++ -O3 -DNDEBUG -std=c++11 -mfma -m64 main.cpp -L./target/release -lgemm_microbench -Wl,-rpath=../gemm_microbench/target/release -o gemm_microbench -lrt -I ../Eigen
 
 run:
-	./matmul_bench
+	./gemm_bench
 
 clean:
 	cargo clean
-	rm -rf matmul_bench
+	rm -rf gemm_microbench

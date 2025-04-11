@@ -8,7 +8,7 @@ extern "C" {
 }
 
 int main(int argc, char* argv[]) {
-    int N = atoi(argv[1]);
+    int N = 5000;
     int tries = 4;
     int rep = std::max<int>(1,10000000/N/N/N);
 
