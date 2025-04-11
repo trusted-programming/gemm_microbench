@@ -7,7 +7,7 @@ preprocess:
 	g++ -O3 -DNDEBUG -std=c++11 -mfma -m64 main.cpp -L./target/release -lgemm_microbench -Wl,-rpath=../gemm_microbench/target/release -o gemm_microbench -lrt -I ../Eigen
 
 run:
-	./gemm_bench
+	./gemm_microbench
 
 clean:
 	cargo clean
