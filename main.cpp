@@ -1,26 +1,50 @@
 #include<iostream>
-#include<cstddef>
-#include<Eigen/Dense>
+#include<unsupported/Eigen/CXX11/Tensor>
 #include<bench/BenchTimer.h>
+
+// Tensor types like in TensorFlow
+template <typename T>
+using ConstMatrix = Eigen::TensorMap<Eigen::Tensor<const T, 2, Eigen::RowMajor>, Eigen::Aligned>;
+template <typename T>
+using Matrix = Eigen::TensorMap<Eigen::Tensor<T, 2, Eigen::RowMajor>, Eigen::Aligned>;
 
 extern "C" {
     void matmul(double* out, const double* inp, const double* weight, size_t B, size_t T, size_t C, size_t OC);
 }
 
-int main(int argc, char* argv[]) {
-    int N = 5000;
-    int tries = 4;
-    int rep = std::max<int>(1,10000000/N/N/N);
+bool compare_results(const Eigen::MatrixXd& m1, const Eigen::MatrixXd& m2, double tol = 1e-8) {
+    return ((m1 - m2).array().abs() < tol).all();
+}
 
-    Eigen::MatrixXd a_E = Eigen::MatrixXd::Random(N,N);
-    Eigen::MatrixXd b_E = Eigen::MatrixXd::Random(N,N);
-    Eigen::MatrixXd c_E(N,N);
+int main(int argc, char* argv[]) {
+    constexpr int N = 5000;
+    constexpr int tries = 4;
+    int rep = std::max<int>(1, 10000000 / N / N / N);
+
+    std::vector<double> a(N * N);
+    std::vector<double> b(N * N);
+    std::vector<double> c(N * N);
+
+    // Fill input matrices with random values
+    for (auto& v : a) v = static_cast<double>(rand()) / RAND_MAX;
+    for (auto& v : b) v = static_cast<double>(rand()) / RAND_MAX;
+
+    ConstMatrix<double> x1(a.data(), N, N);
+    ConstMatrix<double> x2(b.data(), N, N);
+    Matrix<double> y(c.data(), N, N);
+
+    Eigen::DefaultDevice device;
 
     Eigen::BenchTimer t1, t2;
 
-    BENCH(t1, tries, rep, c_E.noalias() = a_E*b_E );
-    BENCH(t2, tries, rep, matmul(c_E.data(), a_E.data(), b_E.data(), 1, 1, N, N));
-    
-    std::cout << "Time taken by Eigen (C++): " << t1.best() << "\n";
-    std::cout << "Time taken by matrixmultiply (Rust): " << t2.best() << "\n\n";
+    Eigen::array<Eigen::IndexPair<int>, 1> dims = {Eigen::IndexPair<int>(1, 0)};
+
+    BENCH(t1, tries, rep, y.device(device) = x1.contract(x2, dims));
+
+    BENCH(t2, tries, rep, matmul(c.data(), a.data(), b.data(), 1, N, N, N));
+
+    std::cout << "Time taken by Eigen Tensor contraction: " << t1.best() << "\n";
+    std::cout << "Time taken by Rust matmul: " << t2.best() << "\n";
+
+    return 0;
 }
