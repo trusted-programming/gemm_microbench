@@ -23,7 +23,8 @@ int main(int argc, char* argv[]) {
 
     std::vector<double> a(N * N);
     std::vector<double> b(N * N);
-    std::vector<double> c(N * N);
+    std::vector<double> c_eigen(N * N);
+    std::vector<double> c_rust(N * N);
 
     // Fill input matrices with random values
     for (auto& v : a) v = static_cast<double>(rand()) / RAND_MAX;
@@ -31,7 +32,7 @@ int main(int argc, char* argv[]) {
 
     ConstMatrix<double> x1(a.data(), N, N);
     ConstMatrix<double> x2(b.data(), N, N);
-    Matrix<double> y(c.data(), N, N);
+    Matrix<double> y(c_eigen.data(), N, N);
 
     Eigen::DefaultDevice device;
 
@@ -41,10 +42,29 @@ int main(int argc, char* argv[]) {
 
     BENCH(t1, tries, rep, y.device(device) = x1.contract(x2, dims));
 
-    BENCH(t2, tries, rep, matmul(c.data(), a.data(), b.data(), 1, N, N, N));
+    BENCH(t2, tries, rep, matmul(c_rust.data(), a.data(), b.data(), 1, N, N, N));
 
     std::cout << "Time taken by Eigen Tensor contraction: " << t1.best() << "\n";
     std::cout << "Time taken by Rust matmul: " << t2.best() << "\n";
+
+    // Compare
+    double tol = 1e-8;
+    bool match = true;
+    for (int i = 0; i < N * N; ++i) {
+        if (std::abs(c_eigen[i] - c_rust[i]) > tol) {
+            std::cout << "Mismatch at index " << i
+                      << ": eigen=" << c_eigen[i]
+                      << ", rust=" << c_rust[i] << "\n";
+            match = false;
+            break;
+        }
+    }
+
+    if (match) {
+        std::cout << "The results MATCH!\n";
+    } else {
+        std::cout << "The results are DIFFERENT!\n";
+    }
 
     return 0;
 }

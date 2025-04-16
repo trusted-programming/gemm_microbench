@@ -12,27 +12,27 @@ pub extern "C" fn matmul(
     out: *mut f64,
     inp: *const f64,
     weight: *const f64,
-    _B: usize, // These are now ignored
+    _B: usize,
     _T: usize,
     _C: usize,
     _OC: usize,
 ) {
     unsafe {
         dgemm(
-            B_CONST * T_CONST,
-            C_CONST,
-            OC_CONST,
+            B_CONST * T_CONST, // m
+            C_CONST, // k
+            OC_CONST, // n
             1.0,
             inp,
-            C_CONST as isize, // Hardcoded stride
-            1,                // Hardcoded stride
+            C_CONST as isize, // a_row_stride
+            1,                // a_col_stride
             weight,
-            1,                // Hardcoded stride
-            C_CONST as isize, // Hardcoded stride
+            OC_CONST as isize, // b_row_stride
+            1,                 // b_col_stride
             0.0,
             out,
-            OC_CONST as isize, // Hardcoded stride
-            1,                // Hardcoded stride
+            OC_CONST as isize, // c_row_stride
+            1,                 // c_col_stride
         );
     };
 }
