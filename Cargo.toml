@@ -5,6 +5,9 @@ edition = "2021"
 
 [dependencies]
 matrixmultiply = { version = "0.3.9", features = ["threading"] }
+blas-src = { version = "0.10.0", features = ["intel-mkl"] }
+cblas= "0.5.0"
+intel-mkl-src = { version = "0.8.1", features = ["mkl-static-lp64-iomp"] }
 
 [lib]
 crate-type = ["cdylib"]
