@@ -4,13 +4,17 @@ Compare MatMul performance of various library implementations.
 
 ## Results
 
-|    Library     | Language | Size  | Result  |
-|----------------|----------|-------|---------|
-|     Eigen      |   C++    |  500  | 0.008s  |
-|                |          | 1000  | 0.061s  |
-|                |          | 5000  | 7.610s  |
-|                |          | 10000 | 61.805s |
-| matrixmultiply |   Rust   |  500  | 0.010s  |
-|                |          | 1000  | 0.076s  |
-|                |          | 5000  | 10.640s |
-|                |          | 10000 | 86.395s |
+| Test Case |    Library     | Language  |  Result  |
+|-----------|----------------|-----------|----------|
+|  Input A  |     Eigen      |    C++    |  0.477s  |
+|           | matrixmultiply |   Rust    |  0.644s  |
+|           |     CBLAS      |   Rust    |  1.226s  |
+|  Input B  |     Eigen      |    C++    |  0.497s  |
+|           | matrixmultiply |   Rust    |  0.754s  |
+|           |     CBLAS      |   Rust    |  1.276s  |
+|  Input C  |     Eigen      |    C++    |  2.083s  |
+|           | matrixmultiply |   Rust    |  2.783s  |
+|           |     CBLAS      |   Rust    |  5.938s  |
+|  Input D  |     Eigen      |    C++    | 39.814s  |
+|           | matrixmultiply |   Rust    | 45.238s  |
+|           |     CBLAS      |   Rust    | 85.979s  |
