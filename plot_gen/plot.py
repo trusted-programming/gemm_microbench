@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import json
+import os
 
 def main():
     # Parse the data
@@ -11,7 +12,9 @@ def main():
     thread_counts = [1, 2, 4, 8, 16, 32, 48]
 
     for thread_count in thread_counts:
-        generate_plot(data, thread_count=thread_count, save_path=f"graphs/results_graph_{thread_count}", show=False)
+        save_path = f"graphs/results_graph_{thread_count}.png"
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        generate_plot(data, thread_count=thread_count, save_path=save_path, show=False)
 
 def generate_plot(data, thread_count, save_path=None, show=True):
     """
@@ -25,17 +28,23 @@ def generate_plot(data, thread_count, save_path=None, show=True):
     """
 
     # Ensure thread_count is a string
-    thread_count = str(thread_count)
+    thread_count_str = str(thread_count)
 
     # Set categories
     inputs = ['input_a', 'input_b', 'input_c', 'input_d']
-    methods = ['eigen', 'matrixmultiply', 'cblas']
-    colors = ['#1f77b4', '#ff7f0e', '#2ca02c']  # Optional color scheme
+    
+    # If thread count > 4, drop 'matrixmultiply'
+    if int(thread_count) > 4:
+        methods = ['eigen', 'cblas']
+        colors = ['#1f77b4', '#2ca02c']
+    else:
+        methods = ['eigen', 'matrixmultiply', 'cblas']
+        colors = ['#1f77b4', '#ff7f0e', '#2ca02c']
 
     # Collect the data
     y_values = []
     for input_key in inputs:
-        method_values = [data[thread_count][input_key][method] for method in methods]
+        method_values = [data[thread_count_str][input_key][method] for method in methods]
         y_values.append(method_values)
 
     # Convert to numpy array for plotting
@@ -44,7 +53,8 @@ def generate_plot(data, thread_count, save_path=None, show=True):
     # Bar chart settings
     x = np.arange(len(inputs))  # input positions
     width = 0.2  # width of each bar
-    offsets = [-width, 0, width]  # for 3 bars per group
+    num_methods = len(methods)
+    offsets = [(i - (num_methods - 1)/2) * width for i in range(num_methods)]
 
     fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -63,6 +73,8 @@ def generate_plot(data, thread_count, save_path=None, show=True):
 
     # Save or Show
     if save_path:
+        if not save_path.lower().endswith(('.png', '.jpg', '.jpeg', '.pdf')):
+            save_path += '.png'
         plt.savefig(save_path, bbox_inches='tight')
     if show:
         plt.show()
