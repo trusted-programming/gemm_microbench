@@ -64,7 +64,7 @@ def generate_plot(data, thread_count, save_path=None, show=True):
     # Labeling and formatting
     ax.set_ylabel('Time (seconds)')
     ax.set_xlabel('Input')
-    ax.set_title(f'Performance by Method for Thread Count: {thread_count}')
+    ax.set_title(f'Performance of DGEMM for Thread Count: {thread_count}')
     ax.set_yscale('log')
     ax.set_xticks(x)
     ax.set_xticklabels([i.replace("input_", "").upper() for i in inputs])
