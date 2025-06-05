@@ -1,0 +1,156 @@
+{
+    "1": {
+        "input_a": {
+        "eigen": 0.466,
+        "matrixmultiply": 0.599,
+        "cblas": 0.406
+        },
+        "input_b": {
+        "eigen": 0.495,
+            "matrixmultiply": 0.607,
+            "cblas": 0.409 
+        },
+        "input_c": {
+            "eigen": 2.073,
+            "matrixmultiply": 2.644,
+            "cblas": 1.705
+        },
+        "input_d": {
+        "eigen": 40.823,
+            "matrixmultiply": 42.953,
+            "cblas": 29.670 
+        }
+    },
+    "2": {
+        "input_a": {
+            "eigen": 0.268,
+            "matrixmultiply": 0.329,
+            "cblas": 0.207
+        },
+        "input_b": {
+            "eigen": 0.281,
+            "matrixmultiply": 0.343,
+            "cblas": 0.211
+        },
+        "input_c": {
+            "eigen": 1.151,
+            "matrixmultiply": 1.443,
+            "cblas": 0.852
+        },
+        "input_d": {
+        "eigen": 28.048,
+            "matrixmultiply": 25.668,
+            "cblas": 15.485
+        }
+    },
+    "4": {
+        "input_a": {
+        "eigen": 0.172,
+        "matrixmultiply": 0.209,
+        "cblas": 0.122
+        },
+        "input_b": {
+        "eigen": 0.173,
+            "matrixmultiply": 0.191,
+            "cblas": 0.124
+        },
+        "input_c": {
+            "eigen": 0.609,
+            "matrixmultiply": 0.808,
+            "cblas": 0.480
+        },
+        "input_d": {
+        "eigen": 14.786,
+            "matrixmultiply": 15.655,
+            "cblas": 9.329
+        }
+    },
+    "8": {
+        "input_a": {
+        "eigen": 0.091,
+        "matrixmultiply": 0.248,
+        "cblas": 0.0695
+        },
+        "input_b": {
+        "eigen": 0.0959,
+            "matrixmultiply": 0.253,
+            "cblas": 0.0668
+        },
+        "input_c": {
+            "eigen": 0.401,
+            "matrixmultiply": 0.976,
+            "cblas": 0.258
+        },
+        "input_d": {
+        "eigen": 5.503,
+            "matrixmultiply": 15.779,
+            "cblas": 4.948
+        }
+    },
+    "16": {
+        "input_a": {
+        "eigen": 0.0691,
+        "matrixmultiply": 0.243,
+        "cblas": 0.0498
+        },
+        "input_b": {
+        "eigen": 0.0767,
+            "matrixmultiply": 0.246,
+            "cblas": 0.0343
+        },
+        "input_c": {
+            "eigen": 0.259,
+            "matrixmultiply": 1.024,
+            "cblas": 0.165
+        },
+        "input_d": {
+        "eigen": 3.381,
+            "matrixmultiply": 16.960,
+            "cblas": 3.994
+        }
+    },
+    "32": {
+        "input_a": {
+        "eigen": 0.0606,
+        "matrixmultiply": 0.231,
+        "cblas": 0.0462
+        },
+        "input_b": {
+        "eigen": 0.0725,
+            "matrixmultiply": 0.240,
+            "cblas": 0.0555
+        },
+        "input_c": {
+            "eigen": 0.235,
+            "matrixmultiply": 0.966,
+            "cblas": 0.187
+        },
+        "input_d": {
+        "eigen": 2.933,
+            "matrixmultiply": 17.732,
+            "cblas": 3.597
+        }
+    },
+    "48": {
+        "input_a": {
+        "eigen": 0.0629,
+        "matrixmultiply": 0.231,
+        "cblas": 0.0307
+        },
+        "input_b": {
+        "eigen": 0.0744,
+            "matrixmultiply": 0.234,
+            "cblas": 0.0462
+        },
+        "input_c": {
+            "eigen": 0.161,
+            "matrixmultiply": 1.009,
+            "cblas": 0.121
+        },
+        "input_d": {
+        "eigen": 3.065,
+            "matrixmultiply": 18.508,
+            "cblas": 3.928
+        }
+    }
+}
