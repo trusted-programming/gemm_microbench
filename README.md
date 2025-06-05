@@ -93,7 +93,7 @@ The benchmark also checks that the result of the GEMM operation matches across a
 |  Input D  |     Eigen      |    C++    | 40.823s  |
 |           | matrixmultiply |   Rust    | 42.953s  |
 |           |     CBLAS      |   Rust    | 29.670s  |
-!(Grpahed Results for single-thread)[plot_gen/graphs/results_graph_1.png]
+![Grpahed Results for single-thread](plot_gen/graphs/results_graph_1.png)
 
 ### 2 Threads
 | Test Case |    Library     | Language  |  Result  |
@@ -110,7 +110,7 @@ The benchmark also checks that the result of the GEMM operation matches across a
 |  Input D  |     Eigen      |    C++    | 28.048s  |
 |           | matrixmultiply |   Rust    | 25.668s  |
 |           |     CBLAS      |   Rust    | 15.485s  |
-!(Grpahed Results for 2 threads)[plot_gen/graphs/results_graph_2.png]
+![Grpahed Results for 2 threads](plot_gen/graphs/results_graph_2.png)
 
 ### 4 Threads (Maximum Threads Supported by matrixmultiply)
 | Test Case |    Library     | Language  |  Result  |
@@ -127,7 +127,7 @@ The benchmark also checks that the result of the GEMM operation matches across a
 |  Input D  |     Eigen      |    C++    | 14.786s  |
 |           | matrixmultiply |   Rust    | 15.655s  |
 |           |     CBLAS      |   Rust    |  9.329s  |
-!(Grpahed Results for 4 threads)[plot_gen/graphs/results_graph_4.png]
+![Grpahed Results for 4 threads](plot_gen/graphs/results_graph_4.png)
 
 ### 8 Threads
 | Test Case |    Library     | Language  |  Result  |
@@ -144,7 +144,7 @@ The benchmark also checks that the result of the GEMM operation matches across a
 |  Input D  |     Eigen      |    C++    |  5.503s  |
 |           | matrixmultiply |   Rust    | 15.779s  |
 |           |     CBLAS      |   Rust    |  4.948s  |
-!(Grpahed Results for 8 threads)[plot_gen/graphs/results_graph_8.png]
+![Grpahed Results for 8 threads](plot_gen/graphs/results_graph_8.png)
 
 ### 16 Threads
 | Test Case |    Library     | Language  |  Result  |
@@ -161,7 +161,7 @@ The benchmark also checks that the result of the GEMM operation matches across a
 |  Input D  |     Eigen      |    C++    |  3.381s  |
 |           | matrixmultiply |   Rust    | 16.960s  |
 |           |     CBLAS      |   Rust    |  3.994s  |
-!(Grpahed Results for 16 threads)[plot_gen/graphs/results_graph_16.png]
+![Grpahed Results for 16 threads](plot_gen/graphs/results_graph_16.png)
 
 ### 32 Threads
 | Test Case |    Library     | Language  |  Result  |
@@ -178,7 +178,7 @@ The benchmark also checks that the result of the GEMM operation matches across a
 |  Input D  |     Eigen      |    C++    |  2.933s  |
 |           | matrixmultiply |   Rust    | 17.732s  |
 |           |     CBLAS      |   Rust    |  3.597s  |
-!(Grpahed Results for 32 threads)[plot_gen/graphs/results_graph_32.png]
+![Grpahed Results for 32 threads](plot_gen/graphs/results_graph_32.png)
 
 ### 48 Threads (Maximum Threads Supported by my testing machine - Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz)
 | Test Case |    Library     | Language  |  Result  |
@@ -195,4 +195,4 @@ The benchmark also checks that the result of the GEMM operation matches across a
 |  Input D  |     Eigen      |    C++    |  3.065s  |
 |           | matrixmultiply |   Rust    | 18.508s  |
 |           |     CBLAS      |   Rust    |  3.928s  |
-!(Grpahed Results for 48 threads)[plot_gen/graphs/results_graph_48.png]
+![Grpahed Results for 48 threads](plot_gen/graphs/results_graph_48.png)
