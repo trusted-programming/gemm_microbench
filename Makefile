@@ -1,4 +1,6 @@
-.PHONY: all setup preprocess run clean postprocess
+.PHONY: all preprocess run clean postprocess
+
+SHELL := /bin/bash
 
 THREADS ?= $(shell nproc)
 
@@ -8,19 +10,15 @@ INCLUDES = -I ../Eigen -I ../benchmark/include
 LDFLAGS = -L./target/release -L/usr/local/lib -Wl,-rpath=../gemm_microbench/target/release
 LDLIBS = -lgemm_microbench -lbenchmark -lpthread -lrt
 
-all: clean setup preprocess run postprocess
-
-setup:
-	sudo cpupower frequency-set -g performance
-	sudo sysctl -w kernel.randomize_va_space=0
+all: clean preprocess run postprocess
 
 preprocess:
-	@bash -c '. /opt/intel/oneapi/setvars.sh --force && \
-	RUSTFLAGS="-C target-cpu=native" cargo build --release && \
-	$(CXX) $(CXXFLAGS) main.cpp $(INCLUDES) $(LDFLAGS) $(LDLIBS) -o gemm_microbench'
+	sudo cpupower frequency-set -g performance
+	RUSTFLAGS="-C target-cpu=native" cargo build --release
+	$(CXX) $(CXXFLAGS) main.cpp $(INCLUDES) $(LDFLAGS) $(LDLIBS) -o gemm_microbench
 
 run:
-	setarch "$(shell uname -m)" -R ./gemm_microbench --benchmark_time_unit=ms
+	setarch "$(shell uname -m)" -R ./gemm_microbench
 
 postprocess:
 	sudo cpupower frequency-set -g powersave
